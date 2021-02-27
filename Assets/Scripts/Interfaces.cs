@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using Enemies;
 using UnityEngine;
 
 public interface IShooting
@@ -9,6 +9,19 @@ public interface IShooting
 
 public interface IDamageable
 {
+    event Action HealthDepletedEvent;
     void TakeDamage(float damage);
+}
+
+public interface ICurable
+{
+    void RestoreHealth(float amount);
+}
+
+public interface ITransition
+{
+    bool Allowed { get; }
+    string NextStateId { get; }
+    void Run(EnemyController controller);
 }
 

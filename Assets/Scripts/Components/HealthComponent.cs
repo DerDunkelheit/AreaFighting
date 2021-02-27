@@ -3,8 +3,9 @@ using UnityEngine;
 
 namespace Components
 {
-    public class HealthComponent : BaseComponent, IDamageable
+    public class HealthComponent : BaseComponent, IDamageable,ICurable
     {
+        public event Action HealthUpdatedEvent;
         public event Action HealthDepletedEvent;
 
         [SerializeField] private float initialHealth = 5;
@@ -24,6 +25,17 @@ namespace Components
             {
                 HealthDepletedEvent?.Invoke();
             }
+        }
+        public void RestoreHealth(float amount)
+        {
+            currentHealth += amount;
+
+            if (currentHealth > initialHealth)
+            {
+                currentHealth = initialHealth;
+            }
+            
+            HealthUpdatedEvent?.Invoke();
         }
     }
 }

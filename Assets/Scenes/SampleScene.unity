@@ -260,6 +260,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b4ff9a2f57e50b419fbd15fdbdad44b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grid: {fileID: 1270373779}
+  collisionMap: {fileID: 2042569479}
+  surface2d: {fileID: 1583160741}
 --- !u!1 &1270373778
 GameObject:
   m_ObjectHideFlags: 0
@@ -2161,6 +2164,7 @@ GameObject:
   - component: {fileID: 1783134662}
   - component: {fileID: 1783134661}
   - component: {fileID: 1783134663}
+  - component: {fileID: 1783134664}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -2227,7 +2231,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783134658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.31, y: 1.06, z: 0}
+  m_LocalPosition: {x: -2.59, y: 2.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2242,12 +2246,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1783134658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9da25c926ec9dc46b2127df582ace8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e1d47706cc8d124a8065c91b0971978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2122124189}
+  detectRange: 5
+  playerController: {fileID: 2122124189}
   enemyHomePoint: {fileID: 1803384252}
-  observeRange: 5
 --- !u!195 &1783134662
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2286,6 +2290,19 @@ MonoBehaviour:
     type: 3}
   projectileSpeed: 5
   fireRate: 1
+--- !u!114 &1783134664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783134658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc56439e5f13de349b51fd74d5d3a09e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialHealth: 2
 --- !u!1 &1803384251
 GameObject:
   m_ObjectHideFlags: 0
@@ -2369,47 +2386,9 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 2042569476}
-    m_ColliderPaths:
-    - - X: 40003000
-        Y: 30000000
-      - X: 30003000
-        Y: 30000000
-      - X: 30003000
-        Y: -20000000
-      - X: 40003000
-        Y: -20000000
-    - - X: -40005004
-        Y: 20000000
-      - X: -50005004
-        Y: 20000000
-      - X: -50005004
-        Y: -20000000
-      - X: -40005004
-        Y: -20000000
-    - - X: -30004000
-        Y: -10000000
-      - X: -40004000
-        Y: -10000000
-      - X: -40004000
-        Y: -20000000
-      - X: -30004000
-        Y: -20000000
+  m_ColliderPaths: []
   m_CompositePaths:
-    m_Paths:
-    - - {x: 4.000271, y: -2}
-      - {x: 4.000271, y: 3}
-      - {x: 3.0003, y: 2.999971}
-      - {x: 3.0003293, y: -2}
-    - - {x: -4.00053, y: -2}
-      - {x: -4.00053, y: 2}
-      - {x: -5.0005007, y: 1.9999708}
-      - {x: -5.000471, y: -2}
-    - - {x: -3.0004292, y: -2}
-      - {x: -3.0004292, y: -1}
-      - {x: -4.0004, y: -1.0000293}
-      - {x: -4.000371, y: -2}
+    m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!19719996 &2042569476
@@ -2424,7 +2403,7 @@ TilemapCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 1
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
@@ -2599,10 +2578,14 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 10
     m_Data: {fileID: 11400000, guid: 4eff20bbe5007bd479ea259a078a90ed, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 10
     m_Data: {fileID: 2703485863965882733, guid: 32a2935c35614424ca0d9cf8de8a196b,
       type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 10
     m_Data:
@@ -2628,8 +2611,8 @@ Tilemap:
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -5, y: -2, z: 0}
-  m_Size: {x: 9, y: 5, z: 1}
+  m_Origin: {x: -8, y: -4, z: 0}
+  m_Size: {x: 15, y: 9, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -2678,6 +2661,8 @@ GameObject:
   - component: {fileID: 2122124190}
   - component: {fileID: 2122124191}
   - component: {fileID: 2122124189}
+  - component: {fileID: 2122124192}
+  - component: {fileID: 2122124193}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2761,8 +2746,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f462cebdce57cc4dad120b61ec0d426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surface2d: {fileID: 1583160741}
-  startingHealth: 3
 --- !u!50 &2122124190
 Rigidbody2D:
   serializedVersion: 4
@@ -2810,3 +2793,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.43216228, y: 0.849349}
   m_EdgeRadius: 0
+--- !u!114 &2122124192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122124186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc56439e5f13de349b51fd74d5d3a09e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialHealth: 5
+--- !u!114 &2122124193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122124186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7bb66315de85c744ab4a26cba20644a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
