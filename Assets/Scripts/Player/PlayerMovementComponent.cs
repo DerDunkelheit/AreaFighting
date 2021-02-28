@@ -6,6 +6,7 @@ namespace Player
     public class PlayerMovementComponent : BaseComponent
     {
         [SerializeField] private float moveSpeed = 5f;
+        [SerializeField] private ParticleSystem moveFx = null;
         
         private float horizontalInput;
         private float verticalInput;
@@ -40,10 +41,36 @@ namespace Player
         {
             base.HandleAbility();
 
-            if (currentMovement.normalized.magnitude > inputTreshold)
+            RotateToDirection();
+            SwitchMoveFx();
+        }
+
+        private void RotateToDirection()
+        {
+            if (IsPlayerMove())
             {
+                if(currentMovement.normalized.y != 0 && currentMovement.normalized.x == 0)
+                    return;
+                
                 this.transform.localScale = currentMovement.normalized.x > 0 ? Vector3.one : new Vector3(-1, 1, 1);
             }
         }
+
+        private void SwitchMoveFx()
+        {
+            if (IsPlayerMove())
+            {
+                if (!moveFx.isPlaying)
+                {
+                    moveFx.Play();
+                }
+            }
+            else
+            {
+                moveFx.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+            }
+        } 
+        
+        private bool IsPlayerMove() => currentMovement.normalized.magnitude > inputTreshold;
     }
 }
