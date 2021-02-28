@@ -31,7 +31,7 @@ namespace Enemies
         private void Awake()
         {
             agent = this.GetComponent<NavMeshAgent>();
-            shootComponent = this.GetComponent<ProjectileShootComponent>();
+            shootComponent = this.GetComponent<IShooting>();
             healthComponent = this.GetComponent<HealthComponent>();
             healthComponent.HealthDepletedEvent += OnEnemyDied;
 

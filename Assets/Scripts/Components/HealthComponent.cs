@@ -5,7 +5,7 @@ namespace Components
 {
     public class HealthComponent : BaseComponent, IDamageable,ICurable
     {
-        public event Action HealthUpdatedEvent;
+        public event Action<float> HealthUpdatedEvent;
         public event Action HealthDepletedEvent;
 
         [SerializeField] private float initialHealth = 5;
@@ -15,6 +15,7 @@ namespace Components
         private void Awake()
         {
             currentHealth = initialHealth;
+            HealthUpdatedEvent += OnHealthUpdated;
         }
 
         public void TakeDamage(float damage)
@@ -35,7 +36,12 @@ namespace Components
                 currentHealth = initialHealth;
             }
             
-            HealthUpdatedEvent?.Invoke();
+            HealthUpdatedEvent?.Invoke(currentHealth);
+        }
+
+        private void OnHealthUpdated(float newValue)
+        {
+            Debug.Log($"current health: {newValue}, owner: {this.gameObject.name}");
         }
     }
 }

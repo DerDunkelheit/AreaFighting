@@ -1,5 +1,8 @@
 ﻿using System;
+using Abilities;
 using Components;
+using Config;
+using Controllers;
 using UnityEngine;
 
 namespace Player
@@ -9,13 +12,33 @@ namespace Player
         public event Action PlayerDeathEven;
 
         private HealthComponent healthComponent;
-        private PlayerMovementComponent movementComponent;
+        private PlayerAbilityComponent abilityComponent;
+        private PlayerConfig config;
 
         private void Awake()
         {
             healthComponent = this.GetComponent<HealthComponent>();
             healthComponent.HealthDepletedEvent += Die;
-            movementComponent = this.GetComponent<PlayerMovementComponent>();
+            abilityComponent = this.GetComponent<PlayerAbilityComponent>();
+            SetAbility(new RestoreHealthAbility(healthComponent, 2));
+        }
+
+        private void Start()
+        {
+            config = GameManager.instance.gameConfig.playerConfig;
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(config.abilityKey))
+            {
+                abilityComponent.TriggerAbility();
+            }
+        }
+
+        public void SetAbility(IAbility newAbility)
+        {
+            abilityComponent.SetAbility(newAbility);
         }
 
         private void Die()

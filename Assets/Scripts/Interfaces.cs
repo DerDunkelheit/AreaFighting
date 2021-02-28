@@ -25,3 +25,8 @@ public interface ITransition
     void Run(EnemyController controller);
 }
 
+public interface IAbility
+{
+    void Cast();
+}
+

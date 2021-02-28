@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Config;
 using UnityEngine;
 
 namespace Controllers
@@ -7,6 +7,8 @@ namespace Controllers
     public class GameManager : MonoBehaviour
     {
         public static GameManager instance;
+
+        public GameConfig gameConfig;
 
         private List<BaseGamerController> controllers;
 
