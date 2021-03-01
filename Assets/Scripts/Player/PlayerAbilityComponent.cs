@@ -31,6 +31,12 @@ namespace Player
 
         public void TriggerAbility()
         {
+            if (currentAbility == null)
+            {
+                Debug.Log($"You have no ability to use!");
+                return;
+            }
+            
             if (CanUseAbility())
             {
                 currentAbility.Cast();

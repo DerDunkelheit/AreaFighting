@@ -20,7 +20,6 @@ namespace Player
             healthComponent = this.GetComponent<HealthComponent>();
             healthComponent.HealthDepletedEvent += Die;
             abilityComponent = this.GetComponent<PlayerAbilityComponent>();
-            SetAbility(new RestoreHealthAbility(healthComponent, 2));
         }
 
         private void Start()
