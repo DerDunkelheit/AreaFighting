@@ -6,19 +6,14 @@ using UnityEngine;
 
 namespace PickupableObjects
 {
-    public class HealAbilityPickup : MonoBehaviour
+    public class HealAbilityPickup : PickupBase
     {
         [SerializeField] private float healthAmount = 2;
 
-        private void OnTriggerEnter2D(Collider2D other)
+        protected override void Pickup()
         {
-            if (other.CompareTag("Player"))
-            {
-                other.GetComponent<PlayerController>()
-                    .SetAbility(new RestoreHealthAbility(other.GetComponent<HealthComponent>(), healthAmount));
-                
-                Destroy(this.gameObject);
-            }
+            player.GetComponent<PlayerController>()
+                .SetAbility(new RestoreHealthAbility(player.GetComponent<HealthComponent>(), healthAmount));
         }
     }
 }

@@ -6,10 +6,13 @@ namespace Player
     //TODO: create a base ability controller in order to give enemies also capability to cast an ability.
     public class PlayerAbilityComponent : BaseComponent
     {
+        [SerializeField] private Transform abilitySpawnPoint = null;
         [SerializeField] private float abilityCoolDown = 10;
         
         private IAbility currentAbility;
         private float timer;
+
+        public Transform AbilitySpawnPoint => abilitySpawnPoint;
 
         protected override bool AllowInput => true;
         

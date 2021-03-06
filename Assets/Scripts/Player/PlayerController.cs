@@ -15,6 +15,8 @@ namespace Player
         private PlayerAbilityComponent abilityComponent;
         private PlayerConfig config;
 
+        public Transform AbilitySpawnPoint => abilityComponent.AbilitySpawnPoint;
+
         private void Awake()
         {
             healthComponent = this.GetComponent<HealthComponent>();

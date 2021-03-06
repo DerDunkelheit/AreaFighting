@@ -7,6 +7,7 @@ namespace Controllers
     public class GameManager : MonoBehaviour
     {
         public static GameManager instance;
+        public static ResourcesProvider resourcesProvider;
 
         public GameConfig gameConfig;
 
@@ -22,6 +23,8 @@ namespace Controllers
             {
                 Destroy(this.gameObject);
             }
+
+            resourcesProvider = this.GetComponentInChildren<ResourcesProvider>();
             
             controllers = new List<BaseGamerController>(this.GetComponents<BaseGamerController>());
             InitAllControllers();
