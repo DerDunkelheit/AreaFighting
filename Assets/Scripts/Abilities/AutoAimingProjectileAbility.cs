@@ -7,23 +7,23 @@ using Object = UnityEngine.Object;
 
 namespace Abilities
 {
-    public class AutoAimingProjectileAbility : IAbility
+    public class AutoAimingProjectileAbility : AbilityBase
     {
-        public event Action AbilityDepletedEvent;
-        
+
         private ProjectileData projectileData;
         private Transform spawnPosition;
         private int abilityCharges;
-        
 
+        protected override string AbilityName => "Projectile";
+        
         public AutoAimingProjectileAbility(ProjectileData projectileData, Transform spawnPosition,int abilityCharges = Int32.MaxValue)
         {
             this.projectileData = projectileData;
             this.spawnPosition = spawnPosition;
             this.abilityCharges = abilityCharges;
         }
-        
-        public void Cast()
+
+        public override void Cast()
         {
             var projectile = Object.Instantiate(GameManager.resourcesProvider.projectileAbilityBasePrefab,
                 spawnPosition.position, spawnPosition.rotation);
@@ -32,10 +32,9 @@ namespace Abilities
             ReduceCharges();
         }
 
-        public AbilityData GetAbilityData()
+        public override AbilityData GetAbilityData()
         {
-            //TODO: remove hardcoded name.
-            return new AbilityData {abilitySprite = projectileData.projectileSprite, abilityName = "Projectile"};
+            return new AbilityData {abilitySprite = projectileData.projectileSprite, abilityName = AbilityName};
         }
 
         private void ReduceCharges()
@@ -44,7 +43,7 @@ namespace Abilities
 
             if (abilityCharges <= 0)
             {
-                AbilityDepletedEvent?.Invoke();
+                TriggerEvent();
             }
         }
     }

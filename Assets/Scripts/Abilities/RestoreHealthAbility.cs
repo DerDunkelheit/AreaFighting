@@ -4,12 +4,12 @@ using Data;
 
 namespace Abilities
 {
-    public class RestoreHealthAbility : IAbility
+    public class RestoreHealthAbility : AbilityBase
     {
-        public event Action AbilityDepletedEvent;
-
         private HealthComponent healthComponent;
         private float healthAmount;
+
+        protected override string AbilityName => "Restore Health";
 
         public RestoreHealthAbility(HealthComponent healthComponent, float healthAmount)
         {
@@ -17,15 +17,15 @@ namespace Abilities
             this.healthAmount = healthAmount;
         }
 
-        public void Cast()
+        public override void Cast()
         {
             healthComponent.RestoreHealth(healthAmount);
         }
 
-        public AbilityData GetAbilityData()
+        public override AbilityData GetAbilityData()
         {
             //TODO: create sprite for that ability and put it in resources provider.
-            return new AbilityData {abilityName = "Restore Health"};
+            return new AbilityData {abilityName = AbilityName};
         }
     }
 }
