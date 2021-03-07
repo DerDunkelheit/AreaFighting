@@ -1,5 +1,6 @@
 ﻿using System;
 using Controllers;
+using Data;
 using Projectiles;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -29,6 +30,12 @@ namespace Abilities
             projectile.GetComponent<ProjectileBase>().StartProjectile(projectileData);
             
             ReduceCharges();
+        }
+
+        public AbilityData GetAbilityData()
+        {
+            //TODO: remove hardcoded name.
+            return new AbilityData {abilitySprite = projectileData.projectileSprite, abilityName = "Projectile"};
         }
 
         private void ReduceCharges()

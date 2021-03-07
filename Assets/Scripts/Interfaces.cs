@@ -1,4 +1,5 @@
 ﻿using System;
+using Data;
 using Enemies;
 using UnityEngine;
 
@@ -27,7 +28,8 @@ public interface ITransition
 
 public interface IAbility
 {
-    void Cast();
     event Action AbilityDepletedEvent;
+    void Cast();
+    AbilityData GetAbilityData();
 }
 

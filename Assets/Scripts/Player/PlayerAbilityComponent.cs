@@ -1,4 +1,5 @@
-﻿using Components;
+﻿using System;
+using Components;
 using UnityEngine;
 
 namespace Player
@@ -6,6 +7,8 @@ namespace Player
     //TODO: create a base ability controller in order to give enemies also capability to cast an ability.
     public class PlayerAbilityComponent : BaseComponent
     {
+        public event Action<IAbility> AbilityEquippedEvent; 
+        
         [SerializeField] private Transform abilitySpawnPoint = null;
         [SerializeField] private float abilityCoolDown = 10;
         
@@ -20,6 +23,11 @@ namespace Player
         {
             base.HandleAbility();
 
+            ReduceAbilityCooldown();
+        }
+
+        private void ReduceAbilityCooldown()
+        {
             timer -= Time.deltaTime;
             if (timer < -10000)
             {
@@ -31,6 +39,9 @@ namespace Player
         {
             currentAbility = newAbility;
             currentAbility.AbilityDepletedEvent += OnAbilityDepleted;
+            timer = 0;
+            
+            AbilityEquippedEvent?.Invoke(currentAbility);
         }
 
         public void TriggerAbility()
@@ -59,6 +70,8 @@ namespace Player
             Debug.Log($"there is no more ability charges");
             currentAbility.AbilityDepletedEvent -= OnAbilityDepleted;
             currentAbility = null;
+            
+            AbilityEquippedEvent?.Invoke(currentAbility);
         }
     }
 }

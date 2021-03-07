@@ -1,5 +1,6 @@
 ﻿using System;
 using Components;
+using Data;
 
 namespace Abilities
 {
@@ -19,6 +20,12 @@ namespace Abilities
         public void Cast()
         {
             healthComponent.RestoreHealth(healthAmount);
+        }
+
+        public AbilityData GetAbilityData()
+        {
+            //TODO: create sprite for that ability and put it in resources provider.
+            return new AbilityData {abilityName = "Restore Health"};
         }
     }
 }

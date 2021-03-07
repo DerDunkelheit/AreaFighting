@@ -8,6 +8,7 @@ namespace Controllers
     {
         public static GameManager instance;
         public static ResourcesProvider resourcesProvider;
+        public static UiController uiController;
 
         public GameConfig gameConfig;
 
@@ -25,8 +26,9 @@ namespace Controllers
             }
 
             resourcesProvider = this.GetComponentInChildren<ResourcesProvider>();
-            
+
             controllers = new List<BaseGamerController>(this.GetComponents<BaseGamerController>());
+            uiController = this.GetComponent<UiController>();
             InitAllControllers();
         }
 
