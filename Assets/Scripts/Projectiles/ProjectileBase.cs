@@ -21,11 +21,6 @@ namespace Projectiles
             StartCoroutine(ProjectileBehaviourRoutine());
         }
 
-        public void SetData(ProjectileData data)
-        {
-            this.data = data;
-        }
-        
         protected abstract void SetupInitialConfigurations();
 
         private IEnumerator ProjectileBehaviourRoutine()

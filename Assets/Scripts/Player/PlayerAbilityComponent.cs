@@ -30,6 +30,7 @@ namespace Player
         public void SetAbility(IAbility newAbility)
         {
             currentAbility = newAbility;
+            currentAbility.AbilityDepletedEvent += OnAbilityDepleted;
         }
 
         public void TriggerAbility()
@@ -52,5 +53,12 @@ namespace Player
         }
 
         private bool CanUseAbility() => timer <= 0;
+
+        private void OnAbilityDepleted()
+        {
+            Debug.Log($"there is no more ability charges");
+            currentAbility.AbilityDepletedEvent -= OnAbilityDepleted;
+            currentAbility = null;
+        }
     }
 }

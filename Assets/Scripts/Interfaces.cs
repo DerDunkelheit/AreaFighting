@@ -28,5 +28,6 @@ public interface ITransition
 public interface IAbility
 {
     void Cast();
+    event Action AbilityDepletedEvent;
 }
 

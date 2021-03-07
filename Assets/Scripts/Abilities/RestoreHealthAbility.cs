@@ -1,9 +1,12 @@
-﻿using Components;
+﻿using System;
+using Components;
 
 namespace Abilities
 {
     public class RestoreHealthAbility : IAbility
     {
+        public event Action AbilityDepletedEvent;
+
         private HealthComponent healthComponent;
         private float healthAmount;
 

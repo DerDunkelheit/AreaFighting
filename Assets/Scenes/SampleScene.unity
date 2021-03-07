@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ca6c62d18dd5f46a7bfbfeeb712604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileData: {fileID: 11400000, guid: dca59496b2c83e74eb88f190f997a59d, type: 2}
+  projectileData: {fileID: 11400000, guid: f1c25ed753496fd4297906726d404a42, type: 2}
 --- !u!61 &1539740232
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2364,6 +2364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1783134660}
   - component: {fileID: 1783134659}
+  - component: {fileID: 1783134665}
   - component: {fileID: 1783134662}
   - component: {fileID: 1783134661}
   - component: {fileID: 1783134663}
@@ -2506,6 +2507,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialHealth: 2
+--- !u!58 &1783134665
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783134658}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3
 --- !u!1 &1803384251
 GameObject:
   m_ObjectHideFlags: 0
